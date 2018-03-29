@@ -32,7 +32,7 @@ double acceleration(struct material matter, vector <vector<double>> &R, int k)
 void iteration(vector <vector<double>> &R, int i, struct material matter, vector<double> &speed)
 {
 	double tmp = 0;
-	double tau = 0.001;
+	double tau = 0.01;
 	tmp = 2 * R[1][i] - R[0][i] + acceleration(matter,R,i)*tau*tau;
 	R[0][i] = R[1][i];
 	R[1][i] = R[2][i];
@@ -57,19 +57,19 @@ void Iniz(vector<double> &speed, vector <vector<double>> &R)
 {
 	for (int i = 0; i < speed.size(); i++)
 	{
-		speed[i]=5000;
-		R[1][i]=i/10.0;
-		R[2][i]=i/100.0;
+		//speed[i]=50;
+		R[1][i]=2*i/800000.0;
+		R[2][i]=1*i/800000.0;
 	}
 }
 int main()
 {
-	int N = 10, count = 0;
+	int N = 2000, count = 0;
 	struct material matter;
-	/*matter.D = 0.223;
+	matter.D = 0.223;
 	matter.a = 2.845*powf(10, -10);
-	matter.alpha = 2.108963093*powf(10,10);
-	matter.mass = 9.2732796 * powf(10,-26);*/
+	matter.alpha = matter.a / 6;//2.108963093*powf(10,10);
+	matter.mass = 9.2732796 * powf(10,-26);
 	/*matter.D = 1;
 	matter.a = 1;
 	matter.alpha = 1;
@@ -87,6 +87,9 @@ int main()
 		cout << count << endl;
 		cout << speed[0] << endl;
 		cout << speed[1] << endl;
+		/*cout << "#####" << endl;
+		cout << R[1][0] << endl;
+		cout << R[1][1] << endl;*/
 		system("pause");
 	} while (!check(speed));
 	return 0;
